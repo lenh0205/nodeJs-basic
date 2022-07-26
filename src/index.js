@@ -34,7 +34,7 @@ app.engine(
   })
 ); // định nghĩa handlebars
 app.set("view engine", "hbs");
-app.set("views", path.join(__dirname, "resources/views"));
+app.set("views", path.join(__dirname, 'resources','views'));
 // console.log(__dirname, path.join(__dirname, 'resources/views))
 
 // Routes init
