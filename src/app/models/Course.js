@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const slug = require('mongoose-slug-generator');
-
-mongoose.plugin(slug);
+const mongooseDelete = require('mongoose-delete')
 
 const Schema = mongoose.Schema;
 
@@ -15,6 +14,13 @@ const Course = new Schema({
 }, {
   timestamps: true
 });
+
+// Add plugin
+mongoose.plugin(slug);
+Course.plugin(mongooseDelete, { 
+  deleteAt: true,
+  overrideMethods: 'all' 
+})
 
 module.exports = mongoose.model('Course', Course);
 // từ model name 'Course' nó sẽ tự suy ra Collection của ta là "courses"
