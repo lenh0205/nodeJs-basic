@@ -1,7 +1,7 @@
 <div class="mt-4">
   <div>
     <h3>Khoa hoc cua toi</h3>
-    <a href="/me/trash/courses">Thung rac</a>
+    <a href="/me/trash/courses">Thung rac ({{deletedCount}})</a>
   </div>
 
   <table class="table mt-4">
@@ -10,7 +10,7 @@
         <th scope="col">#</th>
         <th scope="col">Ten khoa hoc</th>
         <th scope="col">Trình độ</th>
-        <th scope="col" colspan="2">Thời gian tạo</th>
+        <th scope="col" colspan="2">Thời gian xóa</th>
       </tr>
     </thead>
     <tbody>
@@ -19,7 +19,7 @@
         <th scope="row">{{sum @index 1}}</th>
         <td>{{this.name}}</td>
         <td>{{this.level}}</td>
-        <td>{{this.createdAt}}</td>
+        <td>{{this.deletedAt}}</td>
         <td>
           <a href="/courses/{{this._id}}/edit" class="btn btn-link">Sửa</a>
           <a href="button" class="btn btn-link" data-toggle="modal" data-id="{{this._id}}"
