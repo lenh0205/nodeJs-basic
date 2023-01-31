@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/lenh0205/nodejs-basic#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.2.1",
     "express": "^4.18.1",
     "express-handlebars": "^6.0.6",
     "method-override": "^3.0.0",
