@@ -1,27 +1,42 @@
 const mongoose = require("mongoose");
-const slug = require('mongoose-slug-generator');
-const mongooseDelete = require('mongoose-delete')
+const slug = require("mongoose-slug-generator");
+const mongooseDelete = require("mongoose-delete");
 
 const Schema = mongoose.Schema;
 
-const Course = new Schema({
-  name: { type: String, required: true },
-  description: String,
-  image: { type: String, maxLength: 600 },
-  videoId: { type: String },
-  level: { type: String },
-  slug: { type: String, slug: 'name', unique: true }
-}, {
-  timestamps: true
-});
+const CourseSchema = new Schema(
+  {
+    name: { type: String, required: true },
+    description: String,
+    image: { type: String, maxLength: 600 },
+    videoId: { type: String },
+    level: { type: String },
+    slug: { type: String, slug: "name", unique: true },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+// Custom query helpers
+CourseSchema.query.sortable = function (req) {
+  if (req.query.hasOwnProperty("_sort")) {
+    const isValidtype = ["asc", "desc"].includes(req.query.type);
+
+    return this.sort({
+      [req.query.column]: isValidtype ? req.query.type : "desc",
+    });
+  }
+  return this
+};
 
 // Add plugin
 mongoose.plugin(slug);
-Course.plugin(mongooseDelete, { 
+CourseSchema.plugin(mongooseDelete, {
   deleteAt: true,
-  overrideMethods: 'all' 
-})
+  overrideMethods: 'all',
+});
 
-module.exports = mongoose.model('Course', Course);
+module.exports = mongoose.model("Course", CourseSchema);
 // từ model name 'Course' nó sẽ tự suy ra Collection của ta là "courses"
 // Nếu ta tạo Model cho 1 Collection chưa có trong DB, thì nó sẽ tự tạo
